@@ -288,15 +288,18 @@ with pyrtl.conditional_assignment:
         with way == 0b11: 
             enable_3 |= 0b1
             repl_way[index] |= pyrtl.MemBlock.EnabledWrite(0,1)
+        
+        tag_0[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_0)
+        tag_1[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_1)
+        tag_2[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_2)
+        tag_3[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_3)
+
         valid_0[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_0)
         valid_1[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_1)
         valid_2[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_2)
         valid_3[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_3)
 
-        tag_0[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_0)
-        tag_1[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_1)
-        tag_2[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_2)
-        tag_3[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_3)
+
 
     with (req_new == 0b1) & (hit_result == 0b1) & (req_type == 0b1): #write hit 
             with hit_0 == 0b1: 
@@ -311,15 +314,16 @@ with pyrtl.conditional_assignment:
             with hit_3 == 0b1: 
                 enable_3 |= 0b1
                 repl_way[index] |= pyrtl.MemBlock.EnabledWrite(0,1)
-            valid_0[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_0)
-            valid_1[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_1)
-            valid_2[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_2)
-            valid_3[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_3)
-
+            
             tag_0[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_0)
             tag_1[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_1)
             tag_2[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_2)
             tag_3[index] |= pyrtl.MemBlock.EnabledWrite(tag, enable_3)
+
+            valid_0[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_0)
+            valid_1[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_1)
+            valid_2[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_2)
+            valid_3[index] |= pyrtl.MemBlock.EnabledWrite(1, enable_3)
 
 
 # resp_hit <<= hit_result
